@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amy Fonseca | Desarrolladora de Apps Híbridas & Móviles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0f1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Main Card */
+    .profile-card {
+      background-color: #121826;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 36px 30px 28px 30px;
+      width: 100%;
+      max-width: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    /* Device Icon Avatar Container */
+    .avatar-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .avatar-box {
+      width: 58px;
+      height: 58px;
+      background-color: #161c2d;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-icon {
+      width: 22px;
+      height: 34px;
+      border: 2px solid #c084fc;
+      border-radius: 6px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px 0;
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.35);
+    }
+
+    .phone-notch {
+      width: 6px;
+      height: 2px;
+      background-color: #c084fc;
+      border-radius: 1px;
+    }
+
+    .phone-bar {
+      width: 8px;
+      height: 2px;
+      background-color: #c084fc;
+      border-radius: 1px;
+    }
+
+    /* Active Green Status Dot */
+    .status-dot {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 10px;
+      height: 10px;
+      background-color: #10b981;
+      border-radius: 50%;
+      border: 2px solid #0b0f1a;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Name Header */
+    .name-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .first-name-badge {
+      background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 700;
+      padding: 3px 14px;
+      border-radius: 9999px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+    }
+
+    .last-name {
+      color: #38bdf8;
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    /* Subtitle / Role */
+    .role-title {
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Description / Bio */
+    .bio-text {
+      color: #64748b;
+      font-size: 0.77rem;
+      line-height: 1.55;
+      max-width: 310px;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    /* Skills Grid */
+    .skills-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .skills-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .skill-tag {
+      background-color: #161c2d;
+      padding: 4px 13px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      transition: all 0.2s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .skill-tag.flutter {
+      color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.25);
+    }
+
+    .skill-tag.react-native {
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .skill-tag.ionic {
+      color: #60a5fa;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+    }
+
+    .skill-tag.angular {
+      color: #f43f5e;
+      border: 1px solid rgba(244, 63, 94, 0.25);
+    }
+
+    .skill-tag.firebase {
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.25);
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+
+    /* CTA Main Button */
+    .cta-button {
+      width: 100%;
+      background: linear-gradient(90deg, #8261ed 0%, #3b82f6 100%);
+      color: #ffffff;
+      padding: 11px 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(130, 97, 237, 0.35);
+      transition: all 0.2s ease;
+      margin-bottom: 10px;
+    }
+
+    .cta-button:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(130, 97, 237, 0.5);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    /* Social Action Buttons */
+    .social-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .social-btn {
+      background-color: #161c2d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 9px 12px;
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background-color: #1d253b;
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .social-btn:active {
+      transform: translateY(0);
+    }
+
+    /* SVGs */
+    .icon-svg {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="profile-card">
+    <!-- Icon / Avatar -->
+    <div class="avatar-wrapper">
+      <div class="avatar-box">
+        <div class="phone-icon">
+          <div class="phone-notch"></div>
+          <div class="phone-bar"></div>
+        </div>
+      </div>
+      <div class="status-dot"></div>
+    </div>
+
+    <!-- Name Header -->
+    <div class="name-container">
+      <span class="first-name-badge">Amy</span>
+      <span class="last-name">Fonseca</span>
+    </div>
+
+    <!-- Role Subtitle -->
+    <h2 class="role-title">Desarrolladora de Apps Híbridas & Móviles</h2>
+
+    <!-- Bio Description -->
+    <p class="bio-text">
+      Apasionada por crear soluciones móviles innovadoras, fluidas y multiplataforma orientadas a brindar la mejor experiencia de usuario.
+    </p>
+
+    <!-- Skills Badges -->
+    <div class="skills-container">
+      <div class="skills-row">
+        <span class="skill-tag flutter">Flutter</span>
+        <span class="skill-tag react-native">React Native</span>
+        <span class="skill-tag ionic">Ionic</span>
+      </div>
+      <div class="skills-row">
+        <span class="skill-tag angular">Angular</span>
+        <span class="skill-tag firebase">Firebase</span>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="mailto:amy.fonseca@example.com" class="cta-button">
+      <!-- Mail Icon SVG -->
+      <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+      <span>Enviar correo</span>
+    </a>
+
+    <!-- Social Links -->
+    <div class="social-links">
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+        <!-- LinkedIn Icon SVG -->
+        <svg class="icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="#0a66c2">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74v-8.37H5.06v8.37h2.8Z"/>
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+        <!-- GitHub Icon SVG -->
+        <svg class="icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="#cbd5e1">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>
